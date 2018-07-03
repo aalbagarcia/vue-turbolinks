@@ -15,7 +15,11 @@ function plugin(Vue, options) {
       if (this == this.$root) {
         var destroyEvent = this.$options.turbolinksDestroyEvent || 'turbolinks:visit'
         handleVueDestructionOn(destroyEvent, this);
-        this.$originalEl = this.$el.outerHTML;
+        if (this.$el && this.$el.outerHTML) {
+          this.$originalEl = this.$el.outerHTML;
+        } else {
+          this.$originalEl = undefined
+        }
       }
     },
 
